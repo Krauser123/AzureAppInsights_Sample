@@ -7,7 +7,7 @@ const reactPlugin = new ReactPlugin();
 
 const appInsights = new ApplicationInsights({
     config: {
-        instrumentationKey: "INSTRUMENTATION_KEY_DEV",
+        instrumentationKey: process.env.REACT_APP_APPINSIGHT_KEY,
         extensions: [reactPlugin],
         extensionConfig: {
             [reactPlugin.identifier]: { history: browserHistory }

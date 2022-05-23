@@ -1,6 +1,6 @@
 # AzureAppInsights_Sample
 
-Sample of how to add App Insights connectivity to a SPA application to allow that frontend (React) and backend (NET 6.0) send trace, errors, pageViews, etc. to Azure through ILogger.
+Sample of how to add App Insights connectivity to a SPA application to allow that frontend (React) and backend (NET 6.0) send trace, errors, pageViews, etc. to Azure through ILogger. Also the app allow environment variables through appSettings.[Environment].json in backend and .env.[Environment].json files in frontend.
 
 ## Requirements
 An AppInsights resource (Oh Surprise!) created in Azure where we will get the **Connection String or InstrumentationKey**

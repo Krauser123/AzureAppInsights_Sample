@@ -33,7 +33,9 @@
   },
   "devDependencies": {
     "ajv": "^6.9.1",
+    "babel-eslint": "^10.1.0",
     "cross-env": "^7.0.3",
+    "env-cmd": "^10.1.0",
     "eslint": "^7.25.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-flowtype": "^5.7.2",
@@ -44,12 +46,14 @@
     "typescript": "^4.2.4"
   },
   "scripts": {
-    "prestart": "node aspnetcore-https && node aspnetcore-react",
-    "start": "rimraf ./build && react-scripts start",
-    "build": "react-scripts build",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "start": "rimraf ./build && env-cmd -f .env.development.json react-scripts start",
+    "build": "react-scripts --max_old_space_size=4096 build",
+    "build:development": "env-cmd -f .env.development.json react-scripts build && shx rm -rf development && shx cp -r build development",
+    "build:production": "env-cmd -f .env.production.json react-scripts build && shx rm -rf production && shx cp -r build production",
     "test": "cross-env CI=true react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src/"
+    "lint": "eslint -c package.json */**/*.{ts,tsx} && echo Lint completed."
   },
   "eslintConfig": {
     "extends": [

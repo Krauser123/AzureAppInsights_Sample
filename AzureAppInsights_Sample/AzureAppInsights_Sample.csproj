@@ -36,9 +36,12 @@
   </Target>
 
   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
-    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" />
+	  <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+	  <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+	  <Message Importance="high" Text="Started building AzureAppInsights_Sample for DEV" Condition=" '$(Configuration)' == 'Development' " />
+	  <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:development" Condition=" '$(Configuration)' == 'Development' " />
+	  <Message Importance="high" Text="Started building AzureAppInsights_Sample for PRO" Condition=" '$(Configuration)' == 'Release' " />
+	  <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:production" Condition=" '$(Configuration)' == 'Release' " />
 
     <!-- Include the newly-built files in the publish output -->
     <ItemGroup>
